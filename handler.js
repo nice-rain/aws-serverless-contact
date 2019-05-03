@@ -3,8 +3,9 @@ require("dotenv").config(); // read .env file if present.
 
 const nodemailer = require("nodemailer");
 module.exports.hello = async (event, context, callback) => {
-  const user = process.env.MAIL_USER;       // some@mail.com
-  const pass = process.env.MAIL_PASSWORD;   // 42isthecoolestnumber
+  const user = process.env.MAIL_USER; 
+  const pass = process.env.MAIL_PASSWORD;
+  const mailto = process.env.MAIL_TO_ADDRESS;
   
   let transporter = nodemailer.createTransport({
     host: "secure.emailsrvr.com",
@@ -27,7 +28,7 @@ module.exports.hello = async (event, context, callback) => {
   
   let mailOptions = {
     from: `${data.name} <noreply@nicera.in>`,
-    to: `walk12288@gmail.com`, // send to email from contact form
+    to: mailto, // Address that we are sending all email to
     subject: data.subject,
     html: `<p><strong>From:</strong> ${data.name}</p><p><strong>Email:</strong> ${data.email}</p><p><strong>Message</strong>: ${data.message}</p>` // returns html code with interpolated variables
   };
