@@ -22,6 +22,10 @@ module.exports.hello = async (event, context, callback) => {
   if (!data || !data.email || !data.name || !data.message|| !data.subject) {
     return callback(null, {
       statusCode: 400,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: 'Mailing details not provided'
     })
   }
@@ -44,6 +48,10 @@ module.exports.hello = async (event, context, callback) => {
     //Let our client know we had an issue sending mail
     callback(null, {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify(err)
     })
   }
@@ -51,6 +59,10 @@ module.exports.hello = async (event, context, callback) => {
   //Let our client know the mail was sent successfully
   callback(null, {
     statusCode: 200,
-    body: "mail sent successfully"
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
+    body: JSON.stringify({message: "mail sent successfully"})
   });
 };

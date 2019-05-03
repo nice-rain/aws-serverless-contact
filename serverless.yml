@@ -61,6 +61,18 @@ functions:
       - http:
           path: /
           method: post
+          cors: 
+            origins:
+              - https://nicera.in
+              - https://fullstack-dev.pro
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
