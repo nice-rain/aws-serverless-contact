@@ -34,11 +34,21 @@ module.exports.hello = async (event, context, callback) => {
   };
 
   console.log('sending mail');
-  let response = await transporter.sendMail(mailOptions);
-  console.log('mail sent');
-  console.log(response);
+  
+  let response;
+  try{
+    response = await transporter.sendMail(mailOptions);
+    console.log(response);
+  }
+  catch(err){
+    //Let our client know we had an issue sending mail
+    callback(null, {
+      statusCode: 500,
+      body: JSON.stringify(err)
+    })
+  }
 
-  //Add a callback to let our user know the email was a success -  handle failures.
+  //Let our client know the mail was sent successfully
   callback(null, {
     statusCode: 200,
     body: "mail sent successfully"
