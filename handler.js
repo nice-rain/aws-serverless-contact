@@ -19,7 +19,7 @@ module.exports.hello = async (event, context, callback) => {
   console.log(data);
   
   // make sure we have data and email
-  if (!data || !data.email) {
+  if (!data || !data.email || !data.name || !data.message|| !data.subject) {
     return callback(null, {
       statusCode: 400,
       body: 'Mailing details not provided'
